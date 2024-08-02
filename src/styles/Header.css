@@ -1,0 +1,27 @@
+.header {
+    background-color: #1f1e1e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+  }
+  
+  .searchbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 5rem;
+    padding: 0 3rem;
+    background-color: lightgray;
+  }
+  
+  .searchbar input {
+    padding: 8px;
+    border: none;
+    width: 250px;
+    font-weight: bold;
+  }
+  
+  .searchbar input:focus {
+    outline: 2px solid rgb(0, 230, 122);
+  }
