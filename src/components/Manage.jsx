@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Home.css';
 import Table from "./Table"
+// Creating columns for Table
 const columns =[
     {
         field: "name",
@@ -42,6 +43,7 @@ const columns =[
     },
 ];
 const Manage = ({data}) => {
+//   it contains all rows of table
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const Manage = ({data}) => {
         data.map((i,index) => ({
           ...i,
           id:index,
-          name:i.First_Name,
+          name:i.First_Name+" "+i.Last_Name,
           email:i.Email,
           phone :i.Phone,
           type:i.Role,
@@ -62,6 +64,7 @@ const Manage = ({data}) => {
     }
   }, [data]);
     return (
+        
         <Table columns={columns} rows={rows}/>
     );
 

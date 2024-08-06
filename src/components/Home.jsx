@@ -17,6 +17,7 @@ const Home = () => {
    const toggleLogin = () => setIsLogin((prev) => !prev);
    const [storeuser, setstoreuser] = useState([])
 
+   // this handle the Add User 
    const handleAdduser = async (e) => {
       e.preventDefault();
       let newuser = {
@@ -28,20 +29,21 @@ const Home = () => {
          Location: newLocation,
          Department: newDepartment,
       };
-      for (let i = 0; i < alluser.length; i++) {
-         if (alluser[i].Email === newuser.Email && idx < 0) {
+      for (let i = 0; i < storeuser.length; i++) {
+         if (storeuser[i].Email === newuser.Email && idx < 0) {
             return alert("Email Alreay Exists")
          }
       }
       if (idx >= 0) {
-         let updateduser = [...alluser];
+         let updateduser = [...storeuser];
          updateduser[idx] = newuser
          setalluser(updateduser)
+         setstoreuser(updateduser);
          idx = -1;
          alert('Successfully Updated')
       }
       else {
-         let updateduser = [...alluser];
+         let updateduser = [...storeuser];
          updateduser.push(newuser);
          setalluser(updateduser);
          setstoreuser(updateduser);
@@ -55,15 +57,17 @@ const Home = () => {
       setNewDepartment('')
 
    };
-   const filteremail = async (e) => {
-      e.preventDefault();
-      const filteruser = alluser.filter((i) => i.Email.includes(newSearch));
-      setalluser(filteruser);
-   }
+
+
+   // searching and Management of Users
    const changeemail = async (e) => {
-      setalluser(storeuser)
       setnewSearch(e.target.value)
+      const filteruser = storeuser.filter((i) => i.Email.includes(newSearch));
+      if (newSearch.length === 0) setalluser(storeuser)
+      else setalluser(filteruser)
    }
+
+   // this handles Edit User funcrionality
    const toggleEdit = () => {
       let user = prompt('Enter Email')
       for (let i = 0; i < alluser.length; i++) {
@@ -83,8 +87,9 @@ const Home = () => {
    }
    return (
       <>
+         {/* Header */}
          <nav className="header">
-            <h3>Manage Users</h3>
+            <h3 >Manage Users</h3>
             <div style={{ display: 'flex', width: '150px', justifyContent: 'space-between' }}>
 
                {
@@ -103,9 +108,11 @@ const Home = () => {
 
             </div>
          </nav>
-
+         
          {isLogin ? (
+            
             <div className="user-wrapper">
+                  {/* Form for adding User Details */}
                <form className="user-input" onSubmit={handleAdduser}>
                   <div className="input-item">
                      <label>FIRST NAME</label>
@@ -189,14 +196,15 @@ const Home = () => {
             </div>
          ) : (
             <>
-               <form className='searchbar' onSubmit={filteremail}>
+            {/* Display All User and Search Functionaity */}
+               <div className='searchbar'>
                   <input
                      type="text"
                      value={newSearch}
                      onChange={changeemail}
                      placeholder="Search for email"
                   />
-               </form>
+               </div>
                <Manage data={alluser} />
             </>
          )}

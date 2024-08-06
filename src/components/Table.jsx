@@ -1,7 +1,7 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Container, Paper } from "@mui/material";
-
+// Table Showing all User Details
 const Table = ({ rows, columns, rowHeight = 52 }) => {
   return (
     <Container
