@@ -63,7 +63,7 @@ const Home = () => {
    const changeemail = async (e) => {
       setnewSearch(e.target.value)
       const filteruser = storeuser.filter((i) => i.Email.includes(newSearch));
-      if (newSearch.length<1) setalluser(storeuser)
+      if (newSearch.length<=1) setalluser(storeuser)
       else setalluser(filteruser)
    }
 
